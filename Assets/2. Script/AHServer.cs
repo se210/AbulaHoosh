@@ -5,12 +5,25 @@ using System.Collections;
 using System.IO;
 
 public class AHServer : MonoBehaviour {
-
+	public static AHServer singleton = null;
 	public NetworkDiscovery networkDiscovery;
 	public int serverPort;
+	public float[] shakeRate = new float[2] {0, 0};
+	public int[] numShake = new int[2] {0, 0};
 	NetworkServerSimple server = null;
 	NetworkConnection[] playerConnections = new NetworkConnection[2];
 	Byte[][] playerVoiceBuffer = new Byte[2][];
+
+	void Awake() {
+		if (singleton == null)
+		{
+			singleton = this;
+		}
+		else
+		{
+			Destroy(gameObject);
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -48,6 +61,7 @@ public class AHServer : MonoBehaviour {
 		server.RegisterHandler(AHMsg.VoiceFileInfoMessage, OnVoiceFileInfoMessage);
 		server.RegisterHandler(AHMsg.VoiceFileMessage, OnVoiceFileMessage);
 		server.RegisterHandler(AHMsg.VoiceFileCompleteMessage, OnVoiceFileCompleteMessage);
+		server.RegisterHandler(AHMsg.ShakeMessage, OnShakeMessage);
 
 		server.Listen(serverPort);
 	}
@@ -77,6 +91,8 @@ public class AHServer : MonoBehaviour {
 			if (playerConnections[i] == netMsg.conn)
 			{
 				playerConnections[i] = null;
+				shakeRate[i] = 0;
+				numShake[i] = 0;
 				Debug.Log(string.Format("Player {0} disconnected.", i));
 				break;
 			}
@@ -116,5 +132,12 @@ public class AHServer : MonoBehaviour {
 		aud.clip = www.audioClip;
 		while(aud.clip.loadState != AudioDataLoadState.Loaded);
 		aud.Play();
+	}
+
+	void OnShakeMessage(NetworkMessage netMsg)
+	{
+		var msg = netMsg.ReadMessage<AHShakeMessage>();
+		shakeRate[msg.playerNum] = msg.shakeRate;
+		numShake[msg.playerNum] = msg.numShake;
 	}
 }
