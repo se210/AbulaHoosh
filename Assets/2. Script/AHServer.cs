@@ -7,6 +7,7 @@ public class AHServer : MonoBehaviour {
 	public NetworkDiscovery networkDiscovery;
 	public int serverPort;
 	NetworkServerSimple server = null;
+	NetworkConnection[] playerConnections = new NetworkConnection[2];
 
 	// Use this for initialization
 	void Start () {
@@ -49,12 +50,31 @@ public class AHServer : MonoBehaviour {
 
 	void OnConnect(NetworkMessage netMsg)
 	{
-		Debug.Log("Client connected.");
+		for (int i=0; i < playerConnections.Length; i++)
+		{
+			if (playerConnections[i] == null)
+			{
+				playerConnections[i] = netMsg.conn;
+				AHConnectMessage connMsg = new AHConnectMessage();
+				connMsg.playerNum = i;
+				playerConnections[i].Send(AHMsg.ConnectMessage, connMsg);
+				Debug.Log(string.Format("Player {0} connected.", i));
+				break;
+			}
+		}
 	}
 
 	void OnDisconnect(NetworkMessage netMsg)
 	{
-		Debug.Log("Client disconnected.");
+		for (int i=0; i < playerConnections.Length; i++)
+		{
+			if (playerConnections[i] == netMsg.conn)
+			{
+				playerConnections[i] = null;
+				Debug.Log(string.Format("Player {0} disconnected.", i));
+				break;
+			}
+		}
 	}
 
 	void OnSimpleMessage(NetworkMessage netMsg)
