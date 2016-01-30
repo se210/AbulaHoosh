@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using System;
 using System.Collections;
+using System.IO;
 
 public class AHServer : MonoBehaviour {
 
@@ -8,6 +10,7 @@ public class AHServer : MonoBehaviour {
 	public int serverPort;
 	NetworkServerSimple server = null;
 	NetworkConnection[] playerConnections = new NetworkConnection[2];
+	Byte[][] playerVoiceBuffer = new Byte[2][];
 
 	// Use this for initialization
 	void Start () {
@@ -42,6 +45,9 @@ public class AHServer : MonoBehaviour {
 		server.RegisterHandler(MsgType.Connect, OnConnect);
 		server.RegisterHandler(MsgType.Disconnect, OnDisconnect);
 		server.RegisterHandler(AHMsg.SimpleMessage, OnSimpleMessage);
+		server.RegisterHandler(AHMsg.VoiceFileInfoMessage, OnVoiceFileInfoMessage);
+		server.RegisterHandler(AHMsg.VoiceFileMessage, OnVoiceFileMessage);
+		server.RegisterHandler(AHMsg.VoiceFileCompleteMessage, OnVoiceFileCompleteMessage);
 
 		server.Listen(serverPort);
 	}
@@ -81,5 +87,34 @@ public class AHServer : MonoBehaviour {
 	{
 		var msg = netMsg.ReadMessage<AHSimpleMessage>();
 		Debug.Log("Client sent: " + msg.msg);
+	}
+
+	void OnVoiceFileInfoMessage(NetworkMessage netMsg)
+	{
+		var msg = netMsg.ReadMessage<AHVoiceFileInfoMessage>();
+		playerVoiceBuffer[msg.playerNum] = new Byte[msg.fileSize];
+		Debug.Log(string.Format("Player {0} voice transfer initiated. File size: {1} bytes.", msg.playerNum, msg.fileSize));
+	}
+
+	void OnVoiceFileMessage(NetworkMessage netMsg)
+	{
+		var msg = netMsg.ReadMessage<AHVoiceFileMessage>();
+		Array.Copy(msg.bytes, 0, playerVoiceBuffer[msg.playerNum], msg.index, msg.bytes.Length);
+		Debug.Log(string.Format("Player {0} receiving voice data. Index: {1} ({2} bytes).", msg.playerNum, msg.index, msg.bytes.Length));
+	}
+
+	void OnVoiceFileCompleteMessage(NetworkMessage netMsg)
+	{
+		var msg = netMsg.ReadMessage<AHVoiceFileCompleteMessage>();
+		string filePath = Application.persistentDataPath + string.Format("/player{0}.wav",msg.playerNum);
+		File.WriteAllBytes(filePath, playerVoiceBuffer[msg.playerNum]);
+		Debug.Log(string.Format("Player {0} voice transfer completed.", msg.playerNum));
+
+		// Example for playing an audio clip
+		AudioSource aud = gameObject.AddComponent<AudioSource>();
+		WWW www = new WWW("file://"+filePath);
+		aud.clip = www.audioClip;
+		while(aud.clip.loadState != AudioDataLoadState.Loaded);
+		aud.Play();
 	}
 }
