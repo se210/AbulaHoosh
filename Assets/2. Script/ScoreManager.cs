@@ -56,6 +56,7 @@ public class ScoreManager : MonoBehaviour {
                     GameManager.singleton.useShake = false;
                 }
 				GetArduinoData();
+				GetAndroidData();
 				if (nFlag[1] == false)
 				{
 					_soundManager.SendMessage("Play", "Grab1");
@@ -138,7 +139,9 @@ public class ScoreManager : MonoBehaviour {
 
 	IEnumerator Winner(int playerNum)
     {
+		MinionAnimControl minionAnimControl = minions.GetComponent<MinionAnimControl>();
 		MinionVoiceControl minionVoiceControl = minions.GetComponent<MinionVoiceControl>();
+		minionAnimControl.Horayab();
 		minionVoiceControl.playMinionSound(playerNum);
 		infoText.text = string.Format("Player {0} takes Round {1}!!", playerNum+1, (_currentPhase+1)/2);
 		infoText.gameObject.SetActive(true);
@@ -147,6 +150,7 @@ public class ScoreManager : MonoBehaviour {
 //		float minionVoiceTime = (multiplier+1)*beatTime - curTime;
 		yield return new WaitForSeconds(7.0f);
 		minionVoiceControl.stopMinionSound();
+		minionAnimControl.Idle();
 		infoText.gameObject.SetActive(false);
         _currentPhase++;
     }
