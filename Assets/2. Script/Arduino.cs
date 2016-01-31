@@ -5,6 +5,7 @@ using System.IO.Ports;
 public class Arduino : MonoBehaviour {
 
 	public string serialPortName;
+	public AudioSource frogSound;
 	SerialPort sp;
     
     private int buttonCount = 0;
@@ -42,11 +43,13 @@ public class Arduino : MonoBehaviour {
                 if(data == 65)
                 {
 					GameManager.singleton.numGrab[1]++;
+					frogSound.PlayOneShot(frogSound.clip);
                 }
 				// Player 1
                 else if(data == 66)
 				{
 					GameManager.singleton.numGrab[0]++;
+					frogSound.PlayOneShot(frogSound.clip);
                 }
             }
             catch (System.Exception)
