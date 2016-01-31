@@ -872,6 +872,7 @@ MonoBehaviour:
   curPlayer2_Health: 0
   player1HealthBar: {fileID: 757369347}
   player2HealthBar: {fileID: 56460334}
+  arduinoConnection: {fileID: 257462412}
 --- !u!1 &513583926
 GameObject:
   m_ObjectHideFlags: 0
