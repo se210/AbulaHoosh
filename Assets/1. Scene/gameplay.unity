@@ -694,8 +694,8 @@ MonoBehaviour:
   curPlayer1_Health: 0
   curPlayer2_Health: 0
   temp: 10
-  player1HealthBar: {fileID: 757369347}
-  player2HealthBar: {fileID: 56460334}
+  player1HealthBar: {fileID: 56460334}
+  player2HealthBar: {fileID: 757369347}
   sndManager: {fileID: 94572442}
 --- !u!114 &446401405
 MonoBehaviour:
