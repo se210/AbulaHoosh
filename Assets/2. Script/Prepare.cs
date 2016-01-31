@@ -7,6 +7,7 @@ public class Prepare : MonoBehaviour {
 	public Image player1ConnectionInfo;
 	public Image player2ConnectionInfo;
 
+	public GameObject recordButton;
 	public GameObject readyButton;
 
 	// Use this for initialization
@@ -20,12 +21,12 @@ public class Prepare : MonoBehaviour {
 
 		if(AHServer.singleton.areBothPlayersConnected())
 		{
-			readyButton.SetActive(true);
+			recordButton.SetActive(true);
 		}
 
 		if(AHServer.singleton.areBothVoicesLoaded())
 		{
-			SceneManager.LoadScene("gameplay");
+			readyButton.SetActive(true);
 		}
 	}
 
