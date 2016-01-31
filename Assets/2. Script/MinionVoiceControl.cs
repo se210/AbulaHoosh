@@ -5,7 +5,7 @@ public class MinionVoiceControl : MonoBehaviour {
 
 	AudioClip[] playerVoices = new AudioClip[2];
 	AudioSource[] audioSources;
-	int numVoices = 5;
+	int numVoices = 2;
 	float minionPitch = 2.0f;
 
 	// Use this for initialization
