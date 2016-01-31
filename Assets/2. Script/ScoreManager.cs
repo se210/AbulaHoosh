@@ -37,7 +37,6 @@ public class ScoreManager : MonoBehaviour {
         _currentPhase = 0;
         _isPlayer2Win = false;
         _isPlayer1Win = false;
-        againButton.GetComponent<Image>().enabled = false;
     }
 
 	void Update () {
@@ -134,7 +133,9 @@ public class ScoreManager : MonoBehaviour {
                     _soundManager.SendMessage("Play", "Shake2");
                     nFlag[7] = true;
                 }
-                againButton.GetComponent<Image>().enabled = true;
+                break;
+            case 8:
+                againButton.gameObject.SetActive(true);
                 break;
         }
 	}
