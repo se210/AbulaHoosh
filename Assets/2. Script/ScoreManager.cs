@@ -58,7 +58,6 @@ public class ScoreManager : MonoBehaviour {
                     GameManager.singleton.useShake = false;
                 }
 				GetArduinoData();
-				GetAndroidData();
 				if (nFlag[1] == false)
 				{
 					_soundManager.SendMessage("Play", "Grab1");
