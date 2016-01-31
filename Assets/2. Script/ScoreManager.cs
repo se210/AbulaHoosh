@@ -14,6 +14,8 @@ public class ScoreManager : MonoBehaviour {
 	public GameObject minions;
 	public Text infoText;
     public GameObject againButton;
+	public GameObject shakeImage;
+	public GameObject grabImage;
 
     private ScoreManager _scoreManager;
     private SoundManager _soundManager;
@@ -60,6 +62,7 @@ public class ScoreManager : MonoBehaviour {
 				if (nFlag[1] == false)
 				{
 					_soundManager.SendMessage("Play", "Grab1");
+					StartCoroutine(showGrabInstruction());
 					nFlag[1] = true;
 				}
                 break;
@@ -76,13 +79,14 @@ public class ScoreManager : MonoBehaviour {
             case 3:
                 if (GameManager.singleton.useShake == false)
                 {
-                    GameManager.singleton.useShake = true;
+					GameManager.singleton.useShake = true;
                    
                 }
                 GetAndroidData();
                 if (nFlag[3] == false)
                 {
-                    _soundManager.SendMessage("Play", "Shake1");
+					_soundManager.SendMessage("Play", "Shake1");
+					StartCoroutine(showShakeInstruction());
                     nFlag[3] = true;
                 }
                 break;
@@ -100,13 +104,14 @@ public class ScoreManager : MonoBehaviour {
             case 5:
                 if (GameManager.singleton.useShake)
                 {
-                    GameManager.singleton.useShake = false;
+					GameManager.singleton.useShake = false;
                 }
              
                     GetArduinoData();
                     if (nFlag[5] == false)
                     {
-                        _soundManager.SendMessage("Play", "Grab2");
+					_soundManager.SendMessage("Play", "Grab2");
+					StartCoroutine(showGrabInstruction());
                         nFlag[5] = true;
                     }
               
@@ -125,12 +130,13 @@ public class ScoreManager : MonoBehaviour {
             case 7:
                 if (GameManager.singleton.useShake == false)
                 {
-                    GameManager.singleton.useShake = true;
+					GameManager.singleton.useShake = true;
                 }
                 GetAndroidData();
                 if (nFlag[7] == false)
                 {
-                    _soundManager.SendMessage("Play", "Shake2");
+					_soundManager.SendMessage("Play", "Shake2");
+					StartCoroutine(showShakeInstruction());
                     nFlag[7] = true;
                 }
                 break;
@@ -138,6 +144,20 @@ public class ScoreManager : MonoBehaviour {
                 againButton.gameObject.SetActive(true);
                 break;
         }
+	}
+
+	IEnumerator showGrabInstruction()
+	{
+		grabImage.SetActive(true);
+		yield return new WaitForSeconds(5f);
+		grabImage.SetActive(false);
+	}
+
+	IEnumerator showShakeInstruction()
+	{
+		shakeImage.SetActive(true);
+		yield return new WaitForSeconds(5f);
+		shakeImage.SetActive(false);
 	}
 
 	IEnumerator Winner(int playerNum)
