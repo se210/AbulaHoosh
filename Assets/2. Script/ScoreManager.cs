@@ -27,6 +27,7 @@ public class ScoreManager : MonoBehaviour {
     private bool[] nFlag = {false, false,false,false,false,false, false,false };
 
     float addpoint;
+//	float beatTime = 60.0f/132.0f*8.0f;
 
     void Start () {
         addpoint = temp;
@@ -143,6 +144,9 @@ public class ScoreManager : MonoBehaviour {
 		minionVoiceControl.playMinionSound(playerNum);
 		infoText.text = string.Format("Player {0} takes Round {1}!!", playerNum+1, (_currentPhase+1)/2);
 		infoText.gameObject.SetActive(true);
+//		float curTime = Time.realtimeSinceStartup;
+//		float multiplier = Mathf.Floor(curTime/beatTime);
+//		float minionVoiceTime = (multiplier+1)*beatTime - curTime;
 		yield return new WaitForSeconds(8.0f);
 		minionVoiceControl.stopMinionSound();
 		infoText.gameObject.SetActive(false);

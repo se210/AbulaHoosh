@@ -293,6 +293,7 @@ MonoBehaviour:
   - Grab2
   - Shake2
   clipFound: 0
+  bassSound: {fileID: 1891812148}
 --- !u!1 &106418229
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class SoundManager : MonoBehaviour {
     public AudioClip[] audioClip;
     public string[] audioName;
     public bool clipFound;
+	public AudioSource bassSound;
 	// Use this for initialization
 	void Start () {
 	    
@@ -24,6 +25,7 @@ public class SoundManager : MonoBehaviour {
             {
                  gameObject.GetComponent<AudioSource>().clip = audioClip[i];
                 gameObject.GetComponent<AudioSource>().Play();
+				bassSound.Play();
                 clipFound = true;
                 break;
             }
