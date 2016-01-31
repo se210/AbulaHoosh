@@ -19,26 +19,7 @@ public class AnimationControl : MonoBehaviour {
 	
 	void Update () {
 
-//        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
 
-//        if (Input.GetKey(KeyCode.Alpha1))
-//        {
-//            anim.SetInteger("IsFollowMe", 0);
-//            anim.SetInteger("IsGrab", 0);
-//            anim.SetInteger("IsShake", 0);
-//        } else if (Input.GetKey(KeyCode.Alpha2))
-//        {
-//            anim.SetInteger("IsShake", 2);
-//        }
-//        else if (Input.GetKey(KeyCode.Alpha3))
-//        {
-//            anim.SetInteger("IsGrab", 2);
-//        }
-//        else if (Input.GetKey(KeyCode.Alpha4))
-//        {
-//            anim.SetInteger("IsFollowMe", 2);
-//        }
-		// Shaking animation control
 		if (GameManager.singleton.useShake)
 		{
 			float shakeRate = GameManager.singleton.shakeRate[playerNum];

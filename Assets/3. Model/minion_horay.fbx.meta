@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9c6086564146432488705e46474c5444
-timeCreated: 1454228373
+guid: 3fab62e85ecc9b743b70254289771eb0
+timeCreated: 1454253604
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -23,11 +23,10 @@ ModelImporter:
     100030: joint8
     100032: mentalrayIbl1
     100034: //RootNode
-    100036: nurbsCircle2
-    100038: pCube2
-    100040: pCube3
-    100042: pCube5
-    100044: sunDirection
+    100036: pCube2
+    100038: pCube3
+    100040: pCube5
+    100042: sunDirection
     400000: joint1
     400002: joint12
     400004: joint13
@@ -46,11 +45,10 @@ ModelImporter:
     400030: joint8
     400032: mentalrayIbl1
     400034: //RootNode
-    400036: nurbsCircle2
-    400038: pCube2
-    400040: pCube3
-    400042: pCube5
-    400044: sunDirection
+    400036: pCube2
+    400038: pCube3
+    400040: pCube5
+    400042: sunDirection
     2300000: pCube2
     3300000: pCube2
     4300000: pCube2

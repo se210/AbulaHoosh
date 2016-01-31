@@ -6,6 +6,8 @@ TagManager:
   tags:
   - BACKCAMERA
   - SHAKE
+  - BLUE_MINION
+  - RED_MINION
   layers:
   - Default
   - TransparentFX

@@ -35,7 +35,7 @@ public class ScoreManager : MonoBehaviour {
     }
 
 	void Update () {
-        Debug.Log(_currentPhase);
+      //  Debug.Log(_currentPhase);
       switch (_currentPhase) {
             case 1:
                 if (GameManager.singleton.useShake)
@@ -163,9 +163,9 @@ public class ScoreManager : MonoBehaviour {
 	void GetArduinoData()
 	{
 		int player1GrabPoint = GameManager.singleton.numGrab[0];
-        Debug.Log("arduino Data" + player1GrabPoint);
+        //Debug.Log("arduino Data" + player1GrabPoint);
 		int player2GrabPoint = GameManager.singleton.numGrab[1];
-        Debug.Log("arduino Data" + player2GrabPoint );
+        //Debug.Log("arduino Data" + player2GrabPoint );
         if (player1GrabPoint > 0)
 		{
 			Player1_SetHealthBar(player1GrabPoint/50.0f);
