@@ -56,8 +56,6 @@ public class ScoreManager : MonoBehaviour {
                     GameManager.singleton.useShake = false;
                 }
 				GetArduinoData();
-				GameManager.singleton.useShake = true; // temp
-				GetAndroidData(); // temp
 				if (nFlag[1] == false)
 				{
 					_soundManager.SendMessage("Play", "Grab1");
@@ -147,7 +145,7 @@ public class ScoreManager : MonoBehaviour {
 //		float curTime = Time.realtimeSinceStartup;
 //		float multiplier = Mathf.Floor(curTime/beatTime);
 //		float minionVoiceTime = (multiplier+1)*beatTime - curTime;
-		yield return new WaitForSeconds(8.0f);
+		yield return new WaitForSeconds(7.0f);
 		minionVoiceControl.stopMinionSound();
 		infoText.gameObject.SetActive(false);
         _currentPhase++;
