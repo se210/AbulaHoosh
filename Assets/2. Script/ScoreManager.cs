@@ -14,13 +14,14 @@ public class ScoreManager : MonoBehaviour {
     private ScoreManager _scoreManager;
     private SoundManager _soundManager;
 
-    private int _gamePhase = 4;
+    private int _gamePhase = 7;
     private int _currentPhase;
     private int _player1WinCount = 0;
     private int _player2WinCount = 0;
     private bool _isPlayer1Win;
     private bool _isPlayer2Win;
-
+   
+    private bool[] nFlag = {false,false,false,false,false, false,false };
 
     float addpoint;
 
@@ -31,45 +32,110 @@ public class ScoreManager : MonoBehaviour {
         _currentPhase = 1;
         _isPlayer2Win = false;
         _isPlayer1Win = false;
-        Debug.Log(_currentPhase);
-
     }
 
 	void Update () {
-        /*
-		if(GameManager.singleton.useShake)
-		{
-            if (_currentPhase == 2 && _currentPhase<= _gamePhase)
-            {
-            
-                GetAndroidData();
-               // _soundManager.SendMessage("Play", "Shake1");
-            }
-            else if(_currentPhase == 4 && _currentPhase <= _gamePhase)
-            {
-               
-                GetAndroidData();
-               // _soundManager.SendMessage("Play", "Shake1");
-            }
+        Debug.Log(_currentPhase);
+      switch (_currentPhase) {
+            case 1:
+                if (GameManager.singleton.useShake)
+                {
+                    GameManager.singleton.useShake = false;
+                }
+                else {
+                     GetArduinoData();
+                     if (nFlag[0] == false)
+                     {
+                        _soundManager.SendMessage("Play", "Grab1");
+                        nFlag[0] = true;
+                     }
+                }  
+                break;
+           case 2:
+                if (nFlag[1] == false)
+                {
+                    ResetHealth();
+                    _soundManager.SendMessage("Play", "Bridge");
+                    nFlag[1] = true;
+                }
+                StartCoroutine("WaitBrige");
+                break;
 
+            case 3:
+                if (GameManager.singleton.useShake == false)
+                {
+                    GameManager.singleton.useShake = true;
+                   
+                }
+                GetAndroidData();
+                if (nFlag[2] == false)
+                {
+                    _soundManager.SendMessage("Play", "Shake1");
+                    nFlag[2] = true;
+                }
+                break;
+
+            case 4:
+                if (nFlag[3] == false)
+                {
+                    ResetHealth();
+                    _soundManager.SendMessage("Play", "Bridge");
+                    nFlag[3] = true;
+                }
+                StartCoroutine("WaitBrige");
+                break;
+
+            case 5:
+                if (GameManager.singleton.useShake)
+                {
+                    GameManager.singleton.useShake = false;
+                }
+             
+                    GetArduinoData();
+                    if (nFlag[4] == false)
+                    {
+                        _soundManager.SendMessage("Play", "Grab2");
+                        nFlag[4] = true;
+                    }
+              
+                break;
+
+            case 6:
+                if (nFlag[5] == false)
+                {
+                    ResetHealth();
+                    _soundManager.SendMessage("Play", "Bridge");
+                    nFlag[5] = true;
+                }
+                StartCoroutine("WaitBrige");
+                break;
+
+            case 7:
+                if (GameManager.singleton.useShake == false)
+                {
+                    GameManager.singleton.useShake = true;
+                }
+                GetAndroidData();
+                if (nFlag[6] == false)
+                {
+                    _soundManager.SendMessage("Play", "Shake2");
+                    nFlag[6] = true;
+                }
+                break;
         }
-		else
-		{
-			
-            if (_currentPhase == 1 && _currentPhase <= _gamePhase)
-            {
-                GetArduinoData();
-               // _soundManager.SendMessage("Play", "Grab1");
-            }
-            else if(_currentPhase == 3 && _currentPhase <= _gamePhase)
-            {
-                 GetArduinoData();
-//_soundManager.SendMessage("Play", "Grab2");
-            }
-        }
-        */
 	}
 
+    void Winner()
+    {
+        _currentPhase++;
+    }
+    IEnumerator WaitBrige()
+    { 
+        yield return new WaitForSeconds(9f);
+        _currentPhase++;
+        StopCoroutine("WaitBrige");
+
+    }
     void ResetHealth()
     {
         curPlayer1_Health = 0f;
@@ -78,6 +144,8 @@ public class ScoreManager : MonoBehaviour {
         Player2_SetHealthBar(0.0f);
         _isPlayer2Win = false;
         _isPlayer1Win = false;
+        GameManager.singleton.numGrab[0] = 0;
+        GameManager.singleton.numGrab[1] = 0;
     }
 
     void GetAndroidData()
@@ -97,8 +165,10 @@ public class ScoreManager : MonoBehaviour {
 	void GetArduinoData()
 	{
 		int player1GrabPoint = GameManager.singleton.numGrab[0];
+        Debug.Log("arduino Data" + player1GrabPoint);
 		int player2GrabPoint = GameManager.singleton.numGrab[1];
-		if (player1GrabPoint > 0)
+        Debug.Log("arduino Data" + player2GrabPoint );
+        if (player1GrabPoint > 0)
 		{
 			Player1_SetHealthBar(player1GrabPoint/50.0f);
 		}
@@ -108,11 +178,6 @@ public class ScoreManager : MonoBehaviour {
 		}
 	}
 
-    void NextPhase()
-    {
-        Debug.Log(_currentPhase);
-        _currentPhase++;
-    }
     void Player1_SetHealthBar(float myHealth)
     {
         player1HealthBar.transform.localScale = new Vector3(player1HealthBar.transform.localScale.x,
@@ -124,7 +189,7 @@ public class ScoreManager : MonoBehaviour {
                 Debug.Log("you player1");
                 _isPlayer1Win = true;
                 _player1WinCount++;
-                NextPhase();
+                Winner();
             }
         }
     }
@@ -162,8 +227,8 @@ public class ScoreManager : MonoBehaviour {
             {
                 Debug.Log("you player1");
                 _isPlayer2Win = true;
-                _player1WinCount++;
-                NextPhase();
+                _player2WinCount++;
+                Winner(); 
             }
         }
     }

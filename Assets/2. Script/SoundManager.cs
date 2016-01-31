@@ -22,7 +22,7 @@ public class SoundManager : MonoBehaviour {
         {
             if(clipName == audioName[i])
             {
-                gameObject.GetComponent<AudioSource>().clip = audioClip[i];
+                 gameObject.GetComponent<AudioSource>().clip = audioClip[i];
                 gameObject.GetComponent<AudioSource>().Play();
                 clipFound = true;
                 break;
