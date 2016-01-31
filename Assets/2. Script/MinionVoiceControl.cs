@@ -40,4 +40,12 @@ public class MinionVoiceControl : MonoBehaviour {
 			audioSources[i].PlayDelayed(Random.value * 0.1f);
 		}
 	}
+
+	public void stopMinionSound()
+	{
+		for (int i = 0; i < numVoices; i++)
+		{
+			audioSources[i].Stop();
+		}
+	}
 }
