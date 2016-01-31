@@ -154,7 +154,7 @@ public class AHServer : MonoBehaviour {
 	void OnShakeMessage(NetworkMessage netMsg)
 	{
 		var msg = netMsg.ReadMessage<AHShakeMessage>();
-		shakeRate[msg.playerNum] = msg.shakeRate;
+		shakeRate[msg.playerNum] = Mathf.Lerp(shakeRate[msg.playerNum], msg.shakeRate, 0.3f);
 		numShake[msg.playerNum] = msg.numShake;
 	}
 }

@@ -19,7 +19,7 @@ public class ShakeInfo : MonoBehaviour {
 	void Update () {
 		player1ShakeCount += AHServer.singleton.numShake[0];
 		player2ShakeCount += AHServer.singleton.numShake[1];
-		player1ShakeInfo.text = string.Format("Player1 Shake Count: {0:D}", player1ShakeCount);
-		player2ShakeInfo.text = string.Format("Player2 Shake Count: {0:D}", player2ShakeCount);
+		player1ShakeInfo.text = string.Format("Player1 Shake Count: {0:D}, Rate: {1:F}", player1ShakeCount, AHServer.singleton.shakeRate[0]);
+		player2ShakeInfo.text = string.Format("Player2 Shake Count: {0:D}, Rate: {1:F}", player2ShakeCount, AHServer.singleton.shakeRate[1]);
 	}
 }
