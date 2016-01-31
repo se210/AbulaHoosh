@@ -10,6 +10,9 @@ public class AnimationControl : MonoBehaviour {
     int grab;
     int idle;
     int follow;
+
+	float startTime;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -35,12 +38,16 @@ public class AnimationControl : MonoBehaviour {
 //        {
 //            anim.SetInteger("IsFollowMe", 2);
 //        }
-		if (AHServer.singleton.shakeRate[playerNum] > 0.05f)
+		float shakeRate = AHServer.singleton.shakeRate[playerNum];
+		if (shakeRate > 0.05f)
 		{
+			anim.speed = Mathf.Max(shakeRate / 20.0f, 0.5f);
 			Shake();
+			startTime = Time.time;
 		}
 		else
 		{
+			anim.speed = Mathf.Lerp(anim.speed, 1.0f, (Time.time - startTime)/0.3f);
 			Idle();
 		}
 	}
