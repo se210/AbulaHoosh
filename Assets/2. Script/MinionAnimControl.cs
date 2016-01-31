@@ -12,18 +12,21 @@ public class MinionAnimControl : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+	void Start () {
+		
+		redMinions = GameObject.FindGameObjectsWithTag("RED_MINION");
+		blueMinions = GameObject.FindGameObjectsWithTag("BLUE_MINION");
       
-         redCount = GameObject.FindGameObjectsWithTag("RED_MINION").Length;
-         blueCount = GameObject.FindGameObjectsWithTag("BLUE_MINION").Length;
-       
-         redMinions = GameObject.FindGameObjectsWithTag("RED_MINION");
-         blueMinions = GameObject.FindGameObjectsWithTag("BLUE_MINION");
+         redCount = redMinions.Length;
+		blueCount = blueMinions.Length;
 
+		_RedAnims = new Animator[redCount];
         for (int i = 0; i<redCount; i++)
         {
             _RedAnims[i] = redMinions[i].GetComponent<Animator>();
-        }
+		}
+
+		_BlueAnims = new Animator[blueCount];
         for (int i = 0; i < blueCount; i++)
         {
             _BlueAnims[i] = blueMinions[i].GetComponent<Animator>();
