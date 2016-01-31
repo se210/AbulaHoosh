@@ -42,23 +42,21 @@ public class ScoreManager : MonoBehaviour {
                 {
                     GameManager.singleton.useShake = false;
                 }
-                else {
-                     GetArduinoData();
-                     if (nFlag[0] == false)
-                     {
-                        _soundManager.SendMessage("Play", "Grab1");
-                        nFlag[0] = true;
-                     }
-                }  
+				GetArduinoData();
+				if (nFlag[0] == false)
+				{
+					_soundManager.SendMessage("Play", "Grab1");
+					nFlag[0] = true;
+				}
                 break;
            case 2:
                 if (nFlag[1] == false)
                 {
-                    ResetHealth();
                     _soundManager.SendMessage("Play", "Bridge");
                     nFlag[1] = true;
                 }
-                StartCoroutine("WaitBrige");
+				StartCoroutine("WaitBrige");
+				ResetHealth();
                 break;
 
             case 3:
@@ -78,11 +76,11 @@ public class ScoreManager : MonoBehaviour {
             case 4:
                 if (nFlag[3] == false)
                 {
-                    ResetHealth();
                     _soundManager.SendMessage("Play", "Bridge");
                     nFlag[3] = true;
                 }
-                StartCoroutine("WaitBrige");
+				StartCoroutine("WaitBrige");
+				ResetHealth();
                 break;
 
             case 5:
@@ -103,11 +101,11 @@ public class ScoreManager : MonoBehaviour {
             case 6:
                 if (nFlag[5] == false)
                 {
-                    ResetHealth();
                     _soundManager.SendMessage("Play", "Bridge");
                     nFlag[5] = true;
                 }
-                StartCoroutine("WaitBrige");
+				StartCoroutine("WaitBrige");
+				ResetHealth();
                 break;
 
             case 7:
