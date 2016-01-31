@@ -10,13 +10,14 @@ public class AHServer : MonoBehaviour {
 	public int serverPort;
 	public float[] shakeRate = new float[2] {0, 0};
 	public int[] numShake = new int[2] {0, 0};
+	public NetworkConnection[] playerConnections = new NetworkConnection[2];
 	NetworkServerSimple server = null;
-	NetworkConnection[] playerConnections = new NetworkConnection[2];
 	Byte[][] playerVoiceBuffer = new Byte[2][];
 
 	void Awake() {
 		if (singleton == null)
 		{
+			DontDestroyOnLoad(gameObject);
 			singleton = this;
 		}
 		else
@@ -64,6 +65,11 @@ public class AHServer : MonoBehaviour {
 		server.RegisterHandler(AHMsg.ShakeMessage, OnShakeMessage);
 
 		server.Listen(serverPort);
+	}
+
+	public bool areBothPlayersConnected()
+	{
+		return (playerConnections[0] != null && playerConnections[1] != null);
 	}
 
 	// ------------------------ msg handlers ------------------------
