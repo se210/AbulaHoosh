@@ -38,17 +38,25 @@ public class AnimationControl : MonoBehaviour {
 //        {
 //            anim.SetInteger("IsFollowMe", 2);
 //        }
-		float shakeRate = AHServer.singleton.shakeRate[playerNum];
-		if (shakeRate > 0.05f)
+		// Shaking animation control
+		if (GameManager.singleton.useShake)
 		{
-			anim.speed = Mathf.Max(shakeRate / 20.0f, 0.5f);
-			Shake();
-			startTime = Time.time;
+			float shakeRate = GameManager.singleton.shakeRate[playerNum];
+			if (shakeRate > 0.05f)
+			{
+				anim.speed = Mathf.Max(shakeRate / 20.0f, 0.5f);
+				Shake();
+				startTime = Time.time;
+			}
+			else
+			{
+				anim.speed = Mathf.Lerp(anim.speed, 1.0f, (Time.time - startTime)/0.3f);
+				Idle();
+			}
 		}
+		// Grabbing animation control
 		else
 		{
-			anim.speed = Mathf.Lerp(anim.speed, 1.0f, (Time.time - startTime)/0.3f);
-			Idle();
 		}
 	}
 

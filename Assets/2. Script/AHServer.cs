@@ -8,8 +8,6 @@ public class AHServer : MonoBehaviour {
 	public static AHServer singleton = null;
 	public NetworkDiscovery networkDiscovery;
 	public int serverPort;
-	public float[] shakeRate = new float[2] {0, 0};
-	public int[] numShake = new int[2] {0, 0};
 	public NetworkConnection[] playerConnections = new NetworkConnection[2];
 	NetworkServerSimple server = null;
 	Byte[][] playerVoiceBuffer = new Byte[2][];
@@ -108,8 +106,8 @@ public class AHServer : MonoBehaviour {
 			if (playerConnections[i] == netMsg.conn)
 			{
 				playerConnections[i] = null;
-				shakeRate[i] = 0;
-				numShake[i] = 0;
+				GameManager.singleton.shakeRate[i] = 0;
+				GameManager.singleton.numShake[i] = 0;
 				Debug.Log(string.Format("Player {0} disconnected.", i));
 				break;
 			}
@@ -154,7 +152,7 @@ public class AHServer : MonoBehaviour {
 	void OnShakeMessage(NetworkMessage netMsg)
 	{
 		var msg = netMsg.ReadMessage<AHShakeMessage>();
-		shakeRate[msg.playerNum] = Mathf.Lerp(shakeRate[msg.playerNum], msg.shakeRate, 0.3f);
-		numShake[msg.playerNum] = msg.numShake;
+		GameManager.singleton.shakeRate[msg.playerNum] = Mathf.Lerp(GameManager.singleton.shakeRate[msg.playerNum], msg.shakeRate, 0.3f);
+		GameManager.singleton.numShake[msg.playerNum] = msg.numShake;
 	}
 }

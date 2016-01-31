@@ -26,8 +26,8 @@ public class ScoreManager : MonoBehaviour {
 
     void GetAndroidData()
     {
-        player1ShakerPoint = AHServer.singleton.numShake[0];
-        player2ShakerPoint = AHServer.singleton.numShake[1];
+		player1ShakerPoint = GameManager.singleton.numShake[0];
+		player2ShakerPoint = GameManager.singleton.numShake[1];
         if (player1ShakerPoint > 0)
         {
             Player1_IncreaseHealth(player1ShakerPoint/3.0f);
