@@ -66,10 +66,10 @@ public class ScoreManager : MonoBehaviour {
         }
     }
 
-     void Player1_SetHealthBar(float myHelath)
+     void Player1_SetHealthBar(float myHealth)
     {
         player1HealthBar.transform.localScale = new Vector3(player1HealthBar.transform.localScale.x, 
-                                                            myHelath, player1HealthBar.transform.localScale.z);
+			Mathf.Min(myHealth, 1.0f), player1HealthBar.transform.localScale.z);
     }
 
     public void Player2_IncreaseHealth(float num)
@@ -83,9 +83,9 @@ public class ScoreManager : MonoBehaviour {
         }
     }
 
-    public void Player2_SetHealthBar(float myHelath)
+    public void Player2_SetHealthBar(float myHealth)
     {
         player2HealthBar.transform.localScale = new Vector3(player2HealthBar.transform.localScale.x, 
-                                                            myHelath, player2HealthBar.transform.localScale.z);
+			Mathf.Min(myHealth, 1.0f), player2HealthBar.transform.localScale.z);
     }
 }

@@ -38,13 +38,15 @@ public class Arduino : MonoBehaviour {
             try
             {
                 data = sp.ReadByte();
+				// Player 2
                 if(data == 65)
                 {
-					GameManager.singleton.numGrab[0]++;
+					GameManager.singleton.numGrab[1]++;
                 }
+				// Player 1
                 else if(data == 66)
 				{
-					GameManager.singleton.numGrab[1]++;
+					GameManager.singleton.numGrab[0]++;
                 }
             }
             catch (System.Exception)

@@ -428,7 +428,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 80}
+  m_AnchoredPosition: {x: 0, y: 30}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &126775887
@@ -507,12 +507,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 126775887}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &171102205 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11449824, guid: 9caaed7dbe0870a4782d08318fa1fc08,
-    type: 2}
-  m_PrefabInternal: {fileID: 2007672778}
-  m_Script: {fileID: 11500000, guid: 0dbecddd0d1c55b458aba27292680a44, type: 3}
 --- !u!1 &239279121
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,7 +875,6 @@ MonoBehaviour:
   temp: 2
   player1HealthBar: {fileID: 757369347}
   player2HealthBar: {fileID: 56460334}
-  ahServer: {fileID: 171102205}
 --- !u!114 &446401405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -895,11 +888,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gamePhase: 0
   useShake: 0
+  numShake: 0000000000000000
   shakeRate:
   - 0
   - 0
-  numShake: 0000000000000000
+  numGrabPrev: 0000000000000000
   numGrab: 0000000000000000
+  grabRate:
+  - 0
+  - 0
 --- !u!1 &513583926
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,12 +57,26 @@ public class AnimationControl : MonoBehaviour {
 		// Grabbing animation control
 		else
 		{
+			float grabRate = GameManager.singleton.grabRate[playerNum];
+			if (grabRate > 0.05f)
+			{
+				anim.speed = Mathf.Max(grabRate / 3.0f, 0.5f);
+				Grab();
+				startTime = Time.time;
+			}
+			else
+			{
+				anim.speed = Mathf.Lerp(anim.speed, 1.0f, (Time.time - startTime)/0.3f);
+				Idle();
+			}
 		}
 	}
 
     public void Idle()
     {
-        anim.SetInteger("IsShake",0);
+		anim.SetInteger("IsShake",0);
+		anim.SetInteger("IsGrab", 0);
+		anim.SetInteger("IsFollowMe", 0);
     }
 
     public void Shake()
