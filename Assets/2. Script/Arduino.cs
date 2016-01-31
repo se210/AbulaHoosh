@@ -4,14 +4,15 @@ using System.IO.Ports;
 
 public class Arduino : MonoBehaviour {
 
-    public ScoreManager scrMgr;
-    SerialPort sp = new SerialPort("COM3", 9600);
+	public string serialPortName;
+	SerialPort sp;
     
     private int buttonCount = 0;
     private int data = 0;
     
 	// Use this for initialization
 	void Start () {
+		sp = new SerialPort(serialPortName, 9600);
         if (sp.IsOpen)
         {
             sp.Close();
@@ -39,11 +40,11 @@ public class Arduino : MonoBehaviour {
                 data = sp.ReadByte();
                 if(data == 65)
                 {
-                    scrMgr.GetComponent<ScoreManager>().Player1_IncreaseHealth(2.0f);
+					GameManager.singleton.numGrab[0]++;
                 }
                 else if(data == 66)
-                {
-                    scrMgr.GetComponent<ScoreManager>().Player2_IncreaseHealth(2.0f);
+				{
+					GameManager.singleton.numGrab[1]++;
                 }
             }
             catch (System.Exception)

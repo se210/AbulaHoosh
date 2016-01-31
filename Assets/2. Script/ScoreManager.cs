@@ -12,22 +12,25 @@ public class ScoreManager : MonoBehaviour {
 
     float addpoint;
 
-    public AHServer ahServer;
-    private int player1ShakerPoint = 0;
-    private int player2ShakerPoint = 0;
-
     void Start () {
         addpoint = temp;
     }
 
 	void Update () {
-        GetAndroidData();     
+		if(GameManager.singleton.useShake)
+		{
+        	GetAndroidData();
+		}
+		else
+		{
+			GetArduinoData();
+		}
 	}
 
     void GetAndroidData()
     {
-		player1ShakerPoint = GameManager.singleton.numShake[0];
-		player2ShakerPoint = GameManager.singleton.numShake[1];
+		int player1ShakerPoint = GameManager.singleton.numShake[0];
+		int player2ShakerPoint = GameManager.singleton.numShake[1];
         if (player1ShakerPoint > 0)
         {
             Player1_IncreaseHealth(player1ShakerPoint/3.0f);
@@ -37,6 +40,20 @@ public class ScoreManager : MonoBehaviour {
             Player2_IncreaseHealth(player2ShakerPoint /3.0f);
         }
     }
+
+	void GetArduinoData()
+	{
+		int player1GrabPoint = GameManager.singleton.numGrab[0];
+		int player2GrabPoint = GameManager.singleton.numGrab[1];
+		if (player1GrabPoint > 0)
+		{
+			Player1_SetHealthBar(player1GrabPoint/50.0f);
+		}
+		if(player2GrabPoint > 0)
+		{
+			Player2_SetHealthBar(player2GrabPoint/50.0f);
+		}
+	}
 
     public void Player1_IncreaseHealth(float num)
     {

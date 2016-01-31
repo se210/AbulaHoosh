@@ -615,7 +615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e052ea2ef9e3a4cb59a1bc2d20b17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrMgr: {fileID: 446401404}
+  serialPortName: COM5
 --- !u!4 &257462414
 Transform:
   m_ObjectHideFlags: 0
@@ -842,6 +842,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 446401403}
   - 114: {fileID: 446401404}
+  - 114: {fileID: 446401405}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -881,6 +882,24 @@ MonoBehaviour:
   player1HealthBar: {fileID: 757369347}
   player2HealthBar: {fileID: 56460334}
   ahServer: {fileID: 171102205}
+--- !u!114 &446401405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 446401402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e427b6178db93f04f8192d1ff8aa5e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamePhase: 0
+  useShake: 0
+  shakeRate:
+  - 0
+  - 0
+  numShake: 0000000000000000
+  numGrab: 0000000000000000
 --- !u!1 &513583926
 GameObject:
   m_ObjectHideFlags: 0

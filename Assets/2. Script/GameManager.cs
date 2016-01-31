@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 	public bool useShake = true; // which input gains the score in this phase?
 	public float[] shakeRate = new float[2] {0, 0};
 	public int[] numShake = new int[2] {0, 0};
+	public int[] numGrab = new int[2] {0, 0};
 
 	// Use this for initialization
 	void Start () {
