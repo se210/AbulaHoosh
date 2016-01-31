@@ -43,4 +43,9 @@ public class Prepare : MonoBehaviour {
 			player2ConnectionInfo.color = Color.green;
 		}
 	}
+
+	public void startVoiceRecord()
+	{
+		AHServer.singleton.sendStartRecordingMessage();
+	}
 }

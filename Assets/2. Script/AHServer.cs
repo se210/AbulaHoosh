@@ -72,6 +72,17 @@ public class AHServer : MonoBehaviour {
 		return (playerConnections[0] != null && playerConnections[1] != null);
 	}
 
+	public void sendStartRecordingMessage()
+	{
+		foreach (var playerConn in playerConnections)
+		{
+			if (playerConn != null)
+			{
+				playerConn.Send(AHMsg.StartRecordingMessage, new AHSimpleMessage());
+			}
+		}
+	}
+
 	// ------------------------ msg handlers ------------------------
 
 	void OnConnect(NetworkMessage netMsg)
