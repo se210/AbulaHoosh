@@ -11,6 +11,7 @@ public class AHServer : MonoBehaviour {
 	public NetworkConnection[] playerConnections = new NetworkConnection[2];
 	NetworkServerSimple server = null;
 	Byte[][] playerVoiceBuffer = new Byte[2][];
+	bool[] playerVoicesReady = new bool[2]{false, false};
 
 	void Awake() {
 		if (singleton == null)
@@ -68,6 +69,11 @@ public class AHServer : MonoBehaviour {
 	public bool areBothPlayersConnected()
 	{
 		return (playerConnections[0] != null && playerConnections[1] != null);
+	}
+
+	public bool areBothVoicesLoaded()
+	{
+		return (playerVoicesReady[0] && playerVoicesReady[1]);
 	}
 
 	public void sendStartRecordingMessage()
@@ -141,12 +147,8 @@ public class AHServer : MonoBehaviour {
 		File.WriteAllBytes(filePath, playerVoiceBuffer[msg.playerNum]);
 		Debug.Log(string.Format("Player {0} voice transfer completed.", msg.playerNum));
 
-		// Example for playing an audio clip
-		AudioSource aud = gameObject.AddComponent<AudioSource>();
-		WWW www = new WWW("file://"+filePath);
-		aud.clip = www.audioClip;
-		while(aud.clip.loadState != AudioDataLoadState.Loaded);
-		aud.Play();
+		VoiceManager.singleton.playVoice(msg.playerNum);
+		playerVoicesReady[msg.playerNum] = true;
 	}
 
 	void OnShakeMessage(NetworkMessage netMsg)

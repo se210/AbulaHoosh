@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -20,6 +21,11 @@ public class Prepare : MonoBehaviour {
 		if(AHServer.singleton.areBothPlayersConnected())
 		{
 			readyButton.SetActive(true);
+		}
+
+		if(AHServer.singleton.areBothVoicesLoaded())
+		{
+			SceneManager.LoadScene("gameplay");
 		}
 	}
 
