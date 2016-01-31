@@ -256,7 +256,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!82 &94572444
 AudioSource:
   m_ObjectHideFlags: 0
@@ -507,6 +507,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 126775887}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &171102205 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11449824, guid: 9caaed7dbe0870a4782d08318fa1fc08,
+    type: 2}
+  m_PrefabInternal: {fileID: 2007672778}
+  m_Script: {fileID: 11500000, guid: 0dbecddd0d1c55b458aba27292680a44, type: 3}
 --- !u!1 &239279121
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,6 +615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e052ea2ef9e3a4cb59a1bc2d20b17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scrMgr: {fileID: 446401404}
 --- !u!4 &257462414
 Transform:
   m_ObjectHideFlags: 0
@@ -620,7 +627,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!1 &267072902
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +862,7 @@ Transform:
   - {fileID: 1623335763}
   - {fileID: 2103590001}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!114 &446401404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -870,9 +877,10 @@ MonoBehaviour:
   maxHealth: 100
   curPlayer1_Health: 0
   curPlayer2_Health: 0
+  temp: 2
   player1HealthBar: {fileID: 757369347}
   player2HealthBar: {fileID: 56460334}
-  arduinoConnection: {fileID: 257462412}
+  ahServer: {fileID: 171102205}
 --- !u!1 &513583926
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,7 +2054,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
 --- !u!1 &1136761400
 GameObject:
   m_ObjectHideFlags: 0
@@ -2670,7 +2678,7 @@ RectTransform:
   - {fileID: 725312379}
   - {fileID: 106418233}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
