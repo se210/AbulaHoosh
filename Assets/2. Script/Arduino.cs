@@ -29,7 +29,7 @@ public class Arduino : MonoBehaviour {
         buttonCount = temp;
     }
 
-    void Update() {
+    void Update() { 
         if (sp.IsOpen)
         {
             try
